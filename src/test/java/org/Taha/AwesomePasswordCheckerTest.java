@@ -2,10 +2,7 @@ package org.Taha;
 
 import org.Taha.AwesomePasswordChecker;
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.assertArrayEquals;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 import java.io.ByteArrayInputStream;
 import java.io.File;
@@ -14,13 +11,13 @@ import java.io.IOException;
 public class AwesomePasswordCheckerTest {
 
     @Test
-    public void getInstanceTest() throws IOException {
+    public void testgetInstanceTest() throws IOException {
         // Assurer que l'instance est non null
         assertNotNull(AwesomePasswordChecker.getInstance(), "L'instance doit etre non null");
     }
 
   @Test
-    public void getInstanceWihtParam() throws IOException {
+    public void testgetInstanceWihtParam() throws IOException {
         File f = new File("src\\main\\ressources\\cluster_centers_HAC_aff.csv");
         assertNotNull(AwesomePasswordChecker.getInstance(f), "L'instance doit etre non null");
         File tempFile = File.createTempFile("test2", ".txt");
@@ -34,8 +31,8 @@ public class AwesomePasswordCheckerTest {
         String a = "Tadoriya3";
         
         // Fournir un InputStream vide (ou valide selon les besoins)
-        ByteArrayInputStream inputStream = new ByteArrayInputStream("".getBytes());
-        AwesomePasswordChecker checker = new AwesomePasswordChecker(inputStream);
+        ByteArrayInputStream zz = new ByteArrayInputStream("".getBytes());
+        AwesomePasswordChecker checker = new AwesomePasswordChecker(zz);
         
         int tab[] = checker.maskAff(a);
         assertNotNull(tab);
@@ -44,38 +41,46 @@ public class AwesomePasswordCheckerTest {
         new int[] { 3, 1, 2, 1, 1, 1, 2, 1, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 }, tab);
     }
 
-    // @Test
-    // void testMaskAff_UppercaseLetters() {
-    //     AwesomePasswordChecker checker = new AwesomePasswordChecker();
-    //     int[] expected = {3, 3, 4, 4, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
-    //     assertArrayEquals(expected, checker.maskAff("EASXYZ"));
-    // }
+    @Test
+    void testMaskAff_UppercaseLetters() throws IOException {
+        ByteArrayInputStream zzz = new ByteArrayInputStream("".getBytes());
+        AwesomePasswordChecker checker = new AwesomePasswordChecker(zzz);
+        int[] expected = {3, 1, 1, 4, 1, 1, 1, 3, 1, 1, 1, 1, 2, 1, 7, 7, 6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+        assertArrayEquals(expected, checker.maskAff("ItsJustSaitama :/"));
+    }
+
+    @Test
+    public void testGetDistance() throws IOException {
+        File file = new File("C:\\\\Users\\\\hp\\\\Desktop\\\\Revue de code\\\\Tp1RevueDeCode\\\\src\\\\main\\\\ressources\\\\cluster_centers_HAC_aff.csv");
+        AwesomePasswordChecker checker = AwesomePasswordChecker.getInstance(file);
+        
+        String password = "Tadoriya3";
+        double distance = checker.getDistance(password);
+        
+        // On peut comparer la distance avec un seuil ou une valeur attendue
+        assertTrue( distance >= 0);
+        assertEquals(distance,4.688994465931258);
+    }
+
+    @Test
+    public void testGetDistance2() throws IOException {
+        File file = new File("C:\\\\Users\\\\hp\\\\Desktop\\\\Revue de code\\\\Tp1RevueDeCode\\\\src\\\\main\\\\ressources\\\\cluster_centers_HAC_aff.csv");
+        AwesomePasswordChecker checker = AwesomePasswordChecker.getInstance(file);
+        
+        String password = "ItsJustSaitama :/";
+        double distance = checker.getDistance(password);
+        
+        assertTrue( distance >= 0);
+        assertEquals(distance,10.208928554075703);
+    }
 
     // @Test
-    // void testMaskAff_Digits() {
-    //     AwesomePasswordChecker checker = new AwesomePasswordChecker();
-    //     int[] expected = {5, 5, 5, 5, 5, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
-    //     assertArrayEquals(expected, checker.maskAff("123456"));
-    // }
-
-    // @Test
-    // void testMaskAff_SpecialCharacters() {
-    //     AwesomePasswordChecker checker = new AwesomePasswordChecker();
-    //     int[] expected = {6, 6, 6, 6, 6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
-    //     assertArrayEquals(expected, checker.maskAff("!@&>?."));
-    // }
-
-    // @Test
-    // void testMaskAff_EmptyPassword() {
-    //     AwesomePasswordChecker checker = new AwesomePasswordChecker();
-    //     int[] expected = new int[28];
-    //     assertArrayEquals(expected, checker.maskAff(""));
-    // }
-
-    // @Test
-    // void testMaskAff_Combination() {
-    //     AwesomePasswordChecker checker = new AwesomePasswordChecker();
-    //     int[] expected = {1, 2, 3, 4, 5, 6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
-    //     assertArrayEquals(expected, checker.maskAff("eXAl1!"));
+    // public void testMD5WithHello() {
+    //     //String expected = "5d41402abc4b2a76b9719d911017c592"; // MD5 de "hello"
+    //     String result = computeMD5("hello");
+        
+    //     // Vérification
+    //     assertNotNull(result);
+    //     System.out.println(result);
     // }
 }
