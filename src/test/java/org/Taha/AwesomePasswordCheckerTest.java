@@ -7,23 +7,41 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
 
 public class AwesomePasswordCheckerTest {
 
     @Test
-    void testMaskAff_LowercaseLetters() {
-         String a = "Na ";
-        AwesomePasswordChecker checker = new AwesomePasswordChecker();
+    public void getInstanceTest() throws IOException {
+        // Assurer que l'instance est non null
+        assertNotNull(AwesomePasswordChecker.getInstance(), "L'instance doit etre non null");
+    }
+
+  @Test
+    public void getInstanceWihtParam() throws IOException {
+        File f = new File("src\\main\\ressources\\cluster_centers_HAC_aff.csv");
+        assertNotNull(AwesomePasswordChecker.getInstance(f), "L'instance doit etre non null");
+        File tempFile = File.createTempFile("test2", ".txt");
+        AwesomePasswordChecker result = AwesomePasswordChecker.getInstance(tempFile);
+        assertNotNull(result);
+        tempFile.delete();
+    }
+
+    @Test
+    void testMaskAff_LowercaseLetters() throws IOException {
+        String a = "Tadoriya3";
+        
+        // Fournir un InputStream vide (ou valide selon les besoins)
+        ByteArrayInputStream inputStream = new ByteArrayInputStream("".getBytes());
+        AwesomePasswordChecker checker = new AwesomePasswordChecker(inputStream);
+        
         int tab[] = checker.maskAff(a);
         assertNotNull(tab);
         assertTrue(tab.length == 28, "La taille doit etre 28");
-        // Verifier que le tableau correspond bien à la fonctionalité de la fonction
-        // maskAff
         assertArrayEquals(
-                new int[] { 3, 1, 7, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 }, tab);
- 
+        new int[] { 3, 1, 2, 1, 1, 1, 2, 1, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 }, tab);
     }
 
     // @Test

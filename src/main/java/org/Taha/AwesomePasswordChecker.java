@@ -41,7 +41,7 @@ public class AwesomePasswordChecker {
     /**
      * Private constructor to load cluster centers from input stream
      */
-    private AwesomePasswordChecker(InputStream is) throws IOException {
+    public AwesomePasswordChecker(InputStream is) throws IOException {
         try (BufferedReader br = new BufferedReader(new InputStreamReader(is))) {
             String line;
             while ((line = br.readLine()) != null) {
@@ -111,7 +111,7 @@ public class AwesomePasswordChecker {
     /**
      * Computes the Euclidean distance between two arrays
      */
-    private double euclideanDistance(int[] a, double[] b) {
+    public double euclideanDistance(int[] a, double[] b) {
         if (a.length != b.length) {
             throw new IllegalArgumentException("Arrays must have the same length");
         }
