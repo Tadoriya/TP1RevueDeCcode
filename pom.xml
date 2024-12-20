@@ -59,7 +59,7 @@
           <configuration>
               <archive>
                   <manifest>
-                      <mainClass>TP1.MouadProjet.App</mainClass>
+                      <mainClass>TahaAitAhmedOuaal</mainClass>
                   </manifest>
               </archive>
           </configuration>
