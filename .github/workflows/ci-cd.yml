@@ -22,7 +22,7 @@ jobs:
         uses: s4u/setup-maven@v2
         with:
           maven-version: '3.9.5' # Spécifie la version exacte de Maven à installer
-          settings-path: '.github/maven' # Optionnel, si tu veux ajouter un fichier `settings.xml`
+          
 
       # Étape 3 : Configurer le JDK
       - name: Set up JDK 17
@@ -30,17 +30,14 @@ jobs:
         with:
           distribution: 'temurin'
           java-version: '17'
-          cache: maven # Cache des dépendances Maven
+          cache: maven 
 
-      # Étape 4 : Installer les dépendances et compiler
       - name: Install dependencies and build
         run: mvn clean install -DskipTests=true
 
-      # Étape 5 : Lancer les tests
       - name: Run tests
         run: mvn test
 
-      # Étape 6 : Enregistrer les résultats des tests
       - name: Archive Test Results
         if: always()
         uses: actions/upload-artifact@v3
