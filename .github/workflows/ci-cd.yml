@@ -23,14 +23,7 @@ jobs:
           java-version: '11' 
           cache: 'maven'
 
-      # Etape pour vérifier la structure des fichiers et s'assurer que les ressources sont présentes
-      - name: Check if the resource file exists
-        run: |
-          ls -la src/main/resources  # Vérifie la présence du fichier
-          if [ ! -f src/main/resources/cluster_centers_HAC_aff.csv ]; then
-            echo "Resource file src/main/resources/cluster_centers_HAC_aff.csv not found"
-            exit 1
-          fi
+      
 
       - name: Build with Maven
         run: mvn clean install
