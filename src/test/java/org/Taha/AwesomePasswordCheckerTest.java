@@ -20,7 +20,7 @@ public class AwesomePasswordCheckerTest {
 
   @Test
     public void testgetInstanceWihtParam() throws IOException {
-        File f = new File("src\\main\\ressources\\cluster_centers_HAC_aff.csv");
+        File f = new File("src/main/ressources/cluster_centers_HAC_aff.csv");
         assertNotNull(AwesomePasswordChecker.getInstance(f), "L'instance doit etre non null");
         File tempFile = File.createTempFile("test2", ".txt");
         AwesomePasswordChecker result = AwesomePasswordChecker.getInstance(tempFile);
@@ -53,7 +53,7 @@ public class AwesomePasswordCheckerTest {
 
     @Test
     public void testGetDistance() throws IOException {
-        File file = new File("src\\\\main\\\\ressources\\\\cluster_centers_HAC_aff.csv");
+        File file = new File("src/main/ressources/cluster_centers_HAC_aff.csv");
         AwesomePasswordChecker checker = AwesomePasswordChecker.getInstance(file);
         
         String password = "Tadoriya3";
@@ -66,7 +66,7 @@ public class AwesomePasswordCheckerTest {
 
     @Test
     public void testGetDistance2() throws IOException {
-        File file = new File("src\\\\main\\\\ressources\\\\cluster_centers_HAC_aff.csv");
+        File file = new File("src/main/ressources/cluster_centers_HAC_aff.csv");
         AwesomePasswordChecker checker = AwesomePasswordChecker.getInstance(file);
         
         String password = "ItsJustSaitama :/";
@@ -78,12 +78,12 @@ public class AwesomePasswordCheckerTest {
 
     @Test
     public void testMD5() {
-        //String expected = "5d41402abc4b2a76b9719d911017c592"; // MD5 de "hello"
+        String expected = "5d41402abc4b2a76b9719d911017c592"; // MD5 de "hello"
         String result = computeMD5("hello");
                 
                 // Vérification
-        assertNotNull(result);
-        System.out.println(result);
+        //assertNotNull(result);
+        assertEquals(expected,result);
             }
         
             private String computeMD5(String input) {
