@@ -40,3 +40,43 @@ cd TP1RevueDeCcode
 git branch -r
 git fetch origin master
 git checkout master
+
+## Étape 2 : Compilation et exécution
+
+### Compiler le projet avec Maven :
+
+`mvn clean compile`
+
+### Exécuter l'application :
+
+1. Allez dans le répertoire source :
+   
+   `cd src/main/java/org/Taha/`
+   
+2. Compilez le fichier Java :
+   
+   `javac AwesomePasswordChecker.java`
+
+3. Exécutez l'application :
+   
+   `java AwesomePasswordChecker.java`
+
+---
+
+## Utilisation
+
+Lors de l'exécution, l'application vous demande de saisir un mot de passe :
+
+`Enter a password:`
+
+L'application :
+
+1. Calcule la distance minimale entre le masque du mot de passe et les centres de clusters.
+2. Génère le hash MD5 du mot de passe.
+3. Affiche les résultats :
+
+Exemple:
+password:"Tadoriya3"
+distance:4.688994465931258
+MD5 Hash: 2f93e7e3526a9fab0cc40c724175bddf
+
