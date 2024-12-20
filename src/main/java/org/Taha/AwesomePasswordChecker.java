@@ -11,10 +11,13 @@ public class AwesomePasswordChecker {
 
     private static AwesomePasswordChecker instance;
 
+    /**
+     * Liste des clusters sous formes de tableaux.
+     */
     private final List<double[]> clusterCenters = new ArrayList<>();
 
     /**
-     * Singleton instance creation with file input
+     * Creation d'instance avec input fichier
      */
     public static AwesomePasswordChecker getInstance(File file) throws IOException {
         if (instance == null) {
@@ -24,7 +27,7 @@ public class AwesomePasswordChecker {
     }
 
     /**
-     * Singleton instance creation with resource file input
+     * Creation d'instance avec input fichier ressource
      */
     public static AwesomePasswordChecker getInstance() throws IOException {
         if (instance == null) {
@@ -39,7 +42,7 @@ public class AwesomePasswordChecker {
     }
 
     /**
-     * Private constructor to load cluster centers from input stream
+     * Constructeur privé qui charge les centres clusters de inputStream
      */
     public AwesomePasswordChecker(InputStream is) throws IOException {
         try (BufferedReader br = new BufferedReader(new InputStreamReader(is))) {
@@ -59,7 +62,7 @@ public class AwesomePasswordChecker {
     }
 
     /**
-     * Masks the password into an array of integers
+     * Mask les password dans une liste d'entiers
      */
     public int[] maskAff(String password) {
         int[] maskArray = new int[28];
@@ -96,7 +99,7 @@ public class AwesomePasswordChecker {
     }
 
     /**
-     * Calculates the minimum Euclidean distance from the password's mask to the cluster centers
+     *Calcule la distance minimum Euclidienne du mask de password au cluster centre
      */
     public double getDistance(String password) {
         int[] maskArray = maskAff(password);
@@ -109,7 +112,7 @@ public class AwesomePasswordChecker {
     }
 
     /**
-     * Computes the Euclidean distance between two arrays
+     * Calcule la distance euclidienne entre deux listes
      */
     public double euclideanDistance(int[] a, double[] b) {
         if (a.length != b.length) {
@@ -124,7 +127,7 @@ public class AwesomePasswordChecker {
     }
 
     /**
-     * Computes the MD5 hash of a given input
+     * Calcule le hash MD5 d'une entrée donnée.
      */
     public static String computeMD5(String input) {
         byte[] message = input.getBytes();
