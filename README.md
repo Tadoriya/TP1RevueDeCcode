@@ -40,6 +40,8 @@ cd TP1RevueDeCcode
 git branch -r
 git fetch origin master
 git checkout master
+```
+
 
 ## Étape 2 : Compilation et exécution
 
@@ -76,7 +78,11 @@ L'application :
 3. Affiche les résultats :
 
 Exemple:
-password:"Tadoriya3"
-distance:4.688994465931258
-MD5 Hash: 2f93e7e3526a9fab0cc40c724175bddf
+`password:"Tadoriya3"`
+`distance:4.688994465931258`
+`MD5 Hash: 2f93e7e3526a9fab0cc40c724175bddf`
+
+## Auteur
+Taha AIT AHMED OUAAL
+Contact: tahaaitahmedouaal@gmail.com
 
