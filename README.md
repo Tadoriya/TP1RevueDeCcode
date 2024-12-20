@@ -84,5 +84,6 @@ Exemple:
 
 ## Auteur
 Taha AIT AHMED OUAAL
-Contact: tahaaitahmedouaal@gmail.com
+`Contact: tahaaitahmedouaal@gmail.com`
+
 
