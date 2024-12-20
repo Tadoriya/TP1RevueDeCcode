@@ -1,9 +1,9 @@
-name: CI CD
+name: CI/CD Workflow
 
 on:
   push:
     branches:
-      - master 
+      - master
   pull_request:
     branches:
       - master
@@ -14,23 +14,31 @@ jobs:
 
     strategy:
       matrix:
-        java-version: [11, 17] 
+        java-version: [11, 17]
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Faire le JDK ${{ matrix.java-version }}
+      - name: Setup Java ${{ matrix.java-version }}
         uses: actions/setup-java@v2
         with:
           java-version: ${{ matrix.java-version }}
-          distribution: 'adoptopenjdk'  
+          distribution: 'temurin'  
 
-      - name: Compiler avec Maven
+      - name: Cache Maven dependencies
+        uses: actions/cache@v2
+        with:
+          path: ~/.m2
+          key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
+          restore-keys: |
+            ${{ runner.os }}-m2
+
+      - name: Build with Maven
         run: mvn clean install -DskipTests
 
-      - name: Executer les tests avec Maven
+      - name: Les Tests
         run: mvn test
 
-      
-      
+      - name: Generer raport Jacoco 
+        run: mvn verify
