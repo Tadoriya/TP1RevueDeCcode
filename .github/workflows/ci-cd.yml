@@ -1,0 +1,36 @@
+name: CI CD
+
+on:
+  push:
+    branches:
+      - master 
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        java-version: [11, 17] 
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Faire le JDK ${{ matrix.java-version }}
+        uses: actions/setup-java@v2
+        with:
+          java-version: ${{ matrix.java-version }}
+          distribution: 'adoptopenjdk'  
+
+      - name: Compiler avec Maven
+        run: mvn clean install -DskipTests
+
+      - name: Executer les tests avec Maven
+        run: mvn test
+
+      
+      
