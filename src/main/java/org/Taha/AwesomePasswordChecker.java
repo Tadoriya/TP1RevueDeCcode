@@ -226,7 +226,7 @@ public class AwesomePasswordChecker {
 
     public static void main(String[] args) {
         try {
-            File file = new File("src\\main\\ressources\\cluster_centers_HAC_aff.csv");
+            File file = new File("src/main/ressources/cluster_centers_HAC_aff.csv");
             AwesomePasswordChecker checker = AwesomePasswordChecker.getInstance(file);
 
             try (Scanner scanner = new Scanner(System.in)) {

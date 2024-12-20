@@ -13,13 +13,13 @@ import java.nio.ByteOrder;
 public class AwesomePasswordCheckerTest {
 
     @Test
-    public void testInstance1() throws IOException {
+    public void testgetInstanceTest() throws IOException {
         // Assurer que l'instance est non null
         assertNotNull(AwesomePasswordChecker.getInstance(), "L'instance doit etre non null");
     }
 
   @Test
-    public void testInstance2() throws IOException {
+    public void testgetInstanceWihtParam() throws IOException {
         File f = new File("src/main/ressources/cluster_centers_HAC_aff.csv");
         assertNotNull(AwesomePasswordChecker.getInstance(f), "L'instance doit etre non null");
         File tempFile = File.createTempFile("test2", ".txt");
@@ -29,7 +29,7 @@ public class AwesomePasswordCheckerTest {
     }
 
     @Test
-    void testMaskAff1() throws IOException {
+    void testMaskAff_LowercaseLetters() throws IOException {
         String a = "Tadoriya3";
         
         // Fournir un InputStream vide 
@@ -44,7 +44,7 @@ public class AwesomePasswordCheckerTest {
     }
 
     @Test
-    void testMaskAff2() throws IOException {
+    void testMaskAff_UppercaseLetters() throws IOException {
         ByteArrayInputStream zzz = new ByteArrayInputStream("".getBytes());
         AwesomePasswordChecker checker = new AwesomePasswordChecker(zzz);
         int[] expected = {3, 1, 1, 4, 1, 1, 1, 3, 1, 1, 1, 1, 2, 1, 7, 7, 6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
@@ -52,7 +52,7 @@ public class AwesomePasswordCheckerTest {
     }
 
     @Test
-    public void testDistance() throws IOException {
+    public void testGetDistance() throws IOException {
         File file = new File("src/main/ressources/cluster_centers_HAC_aff.csv");
         AwesomePasswordChecker checker = AwesomePasswordChecker.getInstance(file);
         
@@ -65,7 +65,7 @@ public class AwesomePasswordCheckerTest {
     }
 
     @Test
-    public void testDistance2() throws IOException {
+    public void testGetDistance2() throws IOException {
         File file = new File("src/main/ressources/cluster_centers_HAC_aff.csv");
         AwesomePasswordChecker checker = AwesomePasswordChecker.getInstance(file);
         
