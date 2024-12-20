@@ -75,7 +75,6 @@ bash
 Copier le code
 mvn test
 
-Soumettez vos changements via une pull request.
 Auteur
 Taha
 Contact : tahaaitahmedouaal@gmail.com
