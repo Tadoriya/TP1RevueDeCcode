@@ -10,35 +10,49 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04  # Utilisation explicite de la version d'Ubuntu
 
     strategy:
       matrix:
         java-version: [11, 17]
 
     steps:
+      # Étape 1 : Récupération du code source
       - name: Checkout code
         uses: actions/checkout@v2
 
+      # Étape 2 : Configurer Java
       - name: Setup Java ${{ matrix.java-version }}
         uses: actions/setup-java@v2
         with:
           java-version: ${{ matrix.java-version }}
-          distribution: 'temurin'  
+          distribution: 'temurin'
 
+      # Étape 3 : Cache Maven dependencies
       - name: Cache Maven dependencies
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           path: ~/.m2
           key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
           restore-keys: |
             ${{ runner.os }}-m2
 
+      # Étape 4 : Compiler le projet
       - name: Build with Maven
         run: mvn clean install -DskipTests
 
-      - name: Les Tests
+      # Étape 5 : Exécuter les tests
+      - name: Run tests
         run: mvn test
 
-      - name: Generer raport Jacoco 
+      # Étape 6 : Générer le rapport Jacoco
+      - name: Generate Jacoco Report
         run: mvn verify
+
+      # Étape 7 : Télécharger le rapport Jacoco
+      - name: Upload Jacoco Report
+        if: always()
+        uses: actions/upload-artifact@v3
+        with:
+          name: jacoco-report
+          path: target/site/jacoco/
