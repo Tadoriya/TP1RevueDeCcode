@@ -13,27 +13,18 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # Étape 1 : Vérifier le code
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      # Étape 2 : Installer Maven
-      - name: Set up Maven
-        uses: s4u/setup-maven@v2
-        with:
-          maven-version: '3.9.5' # Spécifie la version exacte de Maven à installer
-          
-
-      # Étape 3 : Configurer le JDK
-      - name: Set up JDK 17
+      - name: Set up Java and Maven
         uses: actions/setup-java@v3
         with:
-          distribution: 'temurin'
-          java-version: '17'
-          cache: maven 
+          distribution: 'temurin' # Utilise Temurin comme distribution
+          java-version: '11' # Spécifie la version de Java
+          cache: 'maven' # Active le cache Maven
 
-      - name: Install dependencies and build
-        run: mvn clean install -DskipTests=true
+      - name: Build with Maven
+        run: mvn clean install
 
       - name: Run tests
         run: mvn test
