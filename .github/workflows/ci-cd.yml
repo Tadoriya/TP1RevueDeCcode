@@ -1,27 +1,36 @@
 name: Java Maven CI
 
 on:
-  push:
-    branches:
-      - master
-  pull_request:
-    branches:
-      - master
+  push: 
+    branches: 
+      - master 
+  pull_request: 
+    branches: 
+      - master 
 
-jobs:
-  build:
-    runs-on: ubuntu-latest
+jobs: 
+  build: 
+    runs-on: ubuntu-latest 
 
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
+    steps: 
+      - name: Checkout repository 
+        uses: actions/checkout@v3 
 
-      - name: Set up Java and Maven
-        uses: actions/setup-java@v3
-        with:
-          distribution: 'temurin' # Utilise Temurin comme distribution
-          java-version: '11' # Spécifie la version de Java
-          cache: 'maven' # Active le cache Maven
+      - name: Set up Java and Maven 
+        uses: actions/setup-java@v3 
+        with: 
+          distribution: 'temurin' 
+          java-version: '11' 
+          cache: 'maven'
+
+      # Etape pour vérifier la structure des fichiers et s'assurer que les ressources sont présentes
+      - name: Check if the resource file exists
+        run: |
+          ls -la src/main/resources  # Vérifie la présence du fichier
+          if [ ! -f src/main/resources/cluster_centers_HAC_aff.csv ]; then
+            echo "Resource file src/main/resources/cluster_centers_HAC_aff.csv not found"
+            exit 1
+          fi
 
       - name: Build with Maven
         run: mvn clean install
