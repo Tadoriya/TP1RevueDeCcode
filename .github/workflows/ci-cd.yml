@@ -1,4 +1,4 @@
-name: Java Maven CI
+name: Java Maven CICD
 
 on:
   push: 
@@ -13,10 +13,10 @@ jobs:
     runs-on: ubuntu-latest 
 
     steps: 
-      - name: Checkout repository 
+      - name: Se deplacer en repository 
         uses: actions/checkout@v3 
 
-      - name: Set up Java and Maven 
+      - name: Faire Java et Maven 
         uses: actions/setup-java@v3 
         with: 
           distribution: 'temurin' 
@@ -25,15 +25,15 @@ jobs:
 
       
 
-      - name: Build with Maven
+      - name: Maven
         run: mvn clean install
 
-      - name: Run tests
+      - name: Faire les tests
         run: mvn test
 
-      - name: Archive Test Results
+      - name: Archiver les Tests 
         if: always()
         uses: actions/upload-artifact@v3
         with:
-          name: test-results
+          name: test-resultats
           path: target/surefire-reports/*.xml
